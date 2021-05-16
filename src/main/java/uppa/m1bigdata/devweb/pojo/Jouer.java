@@ -36,6 +36,13 @@ public class Jouer implements Serializable {
 	public Jouer() {
 	}
 
+	public Jouer(int point, Combinaison combinaison, Joueur joueur, Partie partie) {
+		this.point = point;
+		this.combinaison = combinaison;
+		this.joueur = joueur;
+		this.partie = partie;
+	}
+
 	public JouerPK getId() {
 		return this.id;
 	}

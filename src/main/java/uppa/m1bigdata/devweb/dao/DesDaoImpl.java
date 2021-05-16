@@ -50,7 +50,7 @@ public class DesDaoImpl  implements DAO<De> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<De> getAll() throws DAOException {
-		List<De> des=em.createQuery("select d from Joueur d").getResultList();
+		List<De> des=em.createQuery("select d from De d").getResultList();
 		return des;
 	}
 

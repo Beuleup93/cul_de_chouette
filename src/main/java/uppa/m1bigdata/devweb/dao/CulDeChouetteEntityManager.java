@@ -13,10 +13,8 @@ public class CulDeChouetteEntityManager {
 	private EntityManager em;
 	
 	private CulDeChouetteEntityManager() {
-		System.out.println("racine init");
 		emf= Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 		em=emf.createEntityManager();
-		System.out.println("racine finish");
 	}
 
 	public static synchronized CulDeChouetteEntityManager getInstance() {

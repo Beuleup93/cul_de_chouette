@@ -14,9 +14,7 @@ private EntityManager em;
 
 
 	public JoueurDaoImpl() {
-		System.out.println("sub racine  init");
 		em = CulDeChouetteEntityManager.getInstance().getEntityManager();
-		System.out.println("sub racine finish");
 	}
 
 	@Override
@@ -55,15 +53,6 @@ private EntityManager em;
 		List<Joueur> joueurs=em.createQuery("select j from Joueur j").getResultList();
 		return joueurs;
 	}
-
-	  @SuppressWarnings("unchecked")
-	public Joueur find(String pseudo) throws DAOException {
-	        String sql = "SELECT j FROM Joueur j WHERE j.pseudo = :pseudo ";
-	        Query query = em.createQuery(sql);
-	        query.setParameter("pseudo", pseudo);
-			List<Joueur> joueur=query.getResultList();
-	        return joueur.get(0);    
-	    }
 
 
 }

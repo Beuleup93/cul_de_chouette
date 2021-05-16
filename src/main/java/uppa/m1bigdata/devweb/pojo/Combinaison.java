@@ -44,6 +44,14 @@ public class Combinaison implements Serializable {
 	public Combinaison() {
 	}
 
+	public Combinaison(String nomCombinaison, String typeCombinaison, De de1, De de2, De de3) {
+		this.nomCombinaison = nomCombinaison;
+		this.typeCombinaison = typeCombinaison;
+		this.de1 = de1;
+		this.de2 = de2;
+		this.de3 = de3;
+	}
+
 	public int getIdCombinaison() {
 		return this.idCombinaison;
 	}

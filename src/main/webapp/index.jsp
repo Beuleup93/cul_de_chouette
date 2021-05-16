@@ -19,7 +19,7 @@
             </h2>
         </div>
         <div align="center">
-            <a href="https://bootstrapious.com/snippets" class="btn btn-success">Demarrer</a>
+            <a href="JoueurServlet?action=connexion" class="btn btn-success">Demarrer</a>
         </div>
     </div>
    <%-- <div class="col-12 col-md-6 col-sm-6">

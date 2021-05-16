@@ -3,6 +3,7 @@ package uppa.m1bigdata.devweb.pojo;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
+import java.util.Random;
 
 
 /**
@@ -21,7 +22,6 @@ public class De implements Serializable {
 
 	private String nomDes;
 
-	private int valeurFace;
 
 	//bi-directional many-to-one association to Combinaison
 	@OneToMany(mappedBy="de1")
@@ -38,6 +38,10 @@ public class De implements Serializable {
 	public De() {
 	}
 
+	public De(String nomDes) {
+		this.nomDes = nomDes;
+	}
+
 	public int getIdDes() {
 		return this.idDes;
 	}
@@ -52,14 +56,6 @@ public class De implements Serializable {
 
 	public void setNomDes(String nomDes) {
 		this.nomDes = nomDes;
-	}
-
-	public int getValeurFace() {
-		return this.valeurFace;
-	}
-
-	public void setValeurFace(int valeurFace) {
-		this.valeurFace = valeurFace;
 	}
 
 	public List<Combinaison> getCombinaisons1() {
@@ -125,6 +121,11 @@ public class De implements Serializable {
 		getCombinaisons3().remove(combinaisons3);
 		combinaisons3.setDe3(null);
 		return combinaisons3;
+	}
+
+	public int roll(int borneInf, int borneSup){
+		Random random = new Random();
+		return borneInf+random.nextInt(borneSup-borneInf);
 	}
 
 }

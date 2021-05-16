@@ -28,6 +28,10 @@ public class Partie implements Serializable {
 	@OneToMany(mappedBy="partie")
 	private List<Jouer> jouers;
 
+	public Partie(String description) {
+		this.description = description;
+	}
+
 	public Partie() {
 	}
 

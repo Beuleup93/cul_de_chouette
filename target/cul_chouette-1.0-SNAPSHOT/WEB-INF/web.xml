@@ -20,4 +20,24 @@
         <servlet-name>JoueurServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <description></description>
+        <display-name>JoueurServletSecondaire</display-name>
+        <servlet-name>JoueurServletSecondaire</servlet-name>
+        <servlet-class>uppa.m1bigdata.devweb.servlet.JoueurServletSecondaire</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JoueurServletSecondaire</servlet-name>
+        <url-pattern>/JoueurServletSecondaire</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <description></description>
+        <display-name>JeuServlet</display-name>
+        <servlet-name>JeuServlet</servlet-name>
+        <servlet-class>uppa.m1bigdata.devweb.servlet.JeuServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JeuServlet</servlet-name>
+        <url-pattern>/JeuServlet</url-pattern>
+    </servlet-mapping>
 </web-app>
