@@ -47,6 +47,9 @@ public class JoueurServlet extends HttpServlet {
 		try {
 
 			if (action.equals("listeJoueur")){
+				HttpSession session = request.getSession();
+				session.setAttribute("allJoueur",joueurDaoImpl.getAll());
+
 				request.setAttribute("joueurs", joueurDaoImpl.getAll());
 				request.getRequestDispatcher("/WEB-INF/jsp/listeJoueur.jsp").forward(request,response);
 
@@ -71,12 +74,16 @@ public class JoueurServlet extends HttpServlet {
 				String pseudo = request.getParameter("pseudo");
 				Joueur joueur = connex.find(pseudo);
 
-				if(joueur != null) {
+				if(joueursChoisis.size() < 6) {
 					joueursChoisis.add(joueur);
-
 					HttpSession session = request.getSession();
 					session.setAttribute("archiveListeJoueur", joueursChoisis);
 
+					request.setAttribute("listeJoueurs",  joueursChoisis);
+					request.setAttribute("joueurs", joueurDaoImpl.getAll());
+					request.getRequestDispatcher("/WEB-INF/jsp/demarrePartie.jsp").forward(request,response);
+				}else{
+					request.setAttribute("limite", "Vous avez ateint la limite des joueurs à ajouter pour une partie");
 					request.setAttribute("listeJoueurs",  joueursChoisis);
 					request.setAttribute("joueurs", joueurDaoImpl.getAll());
 					request.getRequestDispatcher("/WEB-INF/jsp/demarrePartie.jsp").forward(request,response);
@@ -89,7 +96,17 @@ public class JoueurServlet extends HttpServlet {
 			}
 			else if(action.equals("modif")){
 				request.getRequestDispatcher("/WEB-INF/jsp/espaceJeu.jsp").forward(request,response);
+			}else if(action.equals("reset")){
 
+				HttpSession session = request.getSession();
+				joueursChoisis = new HashSet<>();
+				//Joueur joueur = (Joueur) session.getAttribute("archiveJoueur");
+				//joueursChoisis.add(joueur);
+
+				request.setAttribute("joueurs", joueurDaoImpl.getAll());
+				request.getRequestDispatcher("/WEB-INF/jsp/demarrePartie.jsp").forward(request,response);
+			}else if(action.equals("accueil")){
+				request.getRequestDispatcher("index.jsp").forward(request,response);
 			}
 		} catch (DAOException e) {
 			e.printStackTrace();

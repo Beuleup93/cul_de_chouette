@@ -7,11 +7,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-<jsp:include page="navbar.jsp"/> <br/>
+<jsp:include page="navbar.jsp"/>
+<br/> <br/>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<div class="row">
+<div class="row container col-md-12">
     <div class="col-md-4">
-        <div><b>Nom Complet</b></div>
+        <div><b>Nom Participant</b></div>
         <c:forEach items="${requestScope.joueurs}" var="sp">
             <ol class="list-group list-group-numbered">
                 <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -21,8 +22,22 @@
                 </li>
         </c:forEach>
     </div>
-    <div class="col-md-4" >
-        let's try
+    <div class="col-md-2 offset-1" >
+        <a href="JeuServlet?action=lancer"/>
+            <button type="button" class="btn btn-warning btn-lg">Nouveau lancé</button>
+        </a>
+    </div>
+    <div class="col-md-4 offset-1">
+        <div><b>Nombre de Point Cumulé</b></div>
+        <c:forEach items="${requestScope.joueurs}" var="sp">
+        <ol class="list-group list-group-numbered">
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+                <div class="ms-2 me-auto">
+                    <div><b><c:out value="${sp.nomJoueur}" /></b></div>
+                    <h6>Score: </h6>
+                </div>
+            </li>
+            </c:forEach>
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

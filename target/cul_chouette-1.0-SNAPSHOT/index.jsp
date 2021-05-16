@@ -8,19 +8,21 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="WEB-INF/css/style.css" />
 </head>
-<body>
+<body style="background-image: url(https://cdn.pixabay.com/photo/2016/09/08/18/45/cube-1655118_1280.jpg);">
 <jsp:include page="WEB-INF/jsp/navbar.jsp"/>
 
-<div class="container">
-    <div class="container py-5">
-        <div class="jumbotron text-white jumbotron-image shadow" style="background-image: url(https://cdn.pixabay.com/photo/2016/09/08/18/45/cube-1655118_1280.jpg);">
-            <h2 class="mb-4">
+<div>
+    <div class="container"> <br/> <br/> <br/> <br/> <br/> <br/>
+        <br/> <br/> <br/> <br/> <br/> <br/>
+        <div class="text-white shadow" align="center">
+            <h5>
                 Let's Try Cul De Chouette
-            </h2>
+            </h5>
+            <div>
+                <a href="JoueurServlet?action=connexion" class="btn btn-success btn-lg">Demarrer</a>
+            </div>
         </div>
-        <div align="center">
-            <a href="JoueurServlet?action=connexion" class="btn btn-success">Demarrer</a>
-        </div>
+
     </div>
    <%-- <div class="col-12 col-md-6 col-sm-6">
         <h4>Manipulation de joueurs avec une servlet</h4>

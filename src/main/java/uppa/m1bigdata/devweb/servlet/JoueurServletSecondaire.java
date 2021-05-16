@@ -33,9 +33,7 @@ public class JoueurServletSecondaire extends HttpServlet {
 
         /** Action */
         String add = request.getParameter("addJoueur");
-        String edit = request.getParameter("editJoueur");
-        String Delete = request.getParameter("Delete");
-        String View = request.getParameter("Edit");
+        String partie = request.getParameter("Add");
         String connexion = request.getParameter("connexion");
         String confirmer = request.getParameter("confirmer");
 
@@ -61,6 +59,16 @@ public class JoueurServletSecondaire extends HttpServlet {
                             request.getRequestDispatcher("/WEB-INF/jsp/connexion.jsp").forward(request,response);
                         }
                     }
+                }else if(partie != null){
+                    if(partie.equals("addPartie")){
+                        /** stocker la partie dans une session*/
+                        String desc = request.getParameter("desc");
+                        HttpSession session = request.getSession();
+                        session.setAttribute("description",desc);
+                        /** Rafraichir la liste */
+                        request.setAttribute("joueurs",joueurDaoImpl.getAll());
+                        request.getRequestDispatcher("/WEB-INF/jsp/demarrePartie.jsp").forward(request,response);
+                    }
                 }
                 else if(connexion != null){
                     if(connexion.equals("connexion")){
@@ -73,15 +81,14 @@ public class JoueurServletSecondaire extends HttpServlet {
                         Joueur joueur = connex.login(pseudonyme,password);
                         if(joueur != null){
 
-                            /** archiveJoueur */
+                            /** archive Joueur connecté */
                             HttpSession session = request.getSession();
                             session.setAttribute("archiveJoueur", joueur);
-                            /** */
+                            /** envoit joueur dans la vue */
                             request.setAttribute("joueur", joueur);
                             request.getRequestDispatcher("/WEB-INF/jsp/espaceJoueur.jsp").forward(request,response);
 
                         }else{
-                            System.out.println("Erreur de connexion \nPseudo: "+pseudonyme+" password: "+password);
                             request.setAttribute("error", "Erreur de connexion!! Pseudo: "+pseudonyme+" ou password: "+password+" incorrect");
                             request.getRequestDispatcher("/WEB-INF/jsp/connexion.jsp").forward(request,response);
                         }
