@@ -9,12 +9,14 @@ import javax.persistence.*;
  * 
  */
 @Entity
+@Table(name="Jouer")
 @NamedQuery(name="Jouer.findAll", query="SELECT j FROM Jouer j")
 public class Jouer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private JouerPK id;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int idJouer;
 
 	private int point;
 
@@ -36,19 +38,24 @@ public class Jouer implements Serializable {
 	public Jouer() {
 	}
 
-	public Jouer(int point, Combinaison combinaison, Joueur joueur, Partie partie) {
+	public Jouer(int point) {
+		this.point = point;
+	}
+
+	public Jouer(int idJouer, int point, Combinaison combinaison, Joueur joueur, Partie partie) {
+		this.idJouer = idJouer;
 		this.point = point;
 		this.combinaison = combinaison;
 		this.joueur = joueur;
 		this.partie = partie;
 	}
 
-	public JouerPK getId() {
-		return this.id;
+	public int getIdJouer() {
+		return idJouer;
 	}
 
-	public void setId(JouerPK id) {
-		this.id = id;
+	public void setIdJouer(int idJouer) {
+		this.idJouer = idJouer;
 	}
 
 	public int getPoint() {

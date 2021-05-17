@@ -18,6 +18,7 @@ public class JouerDaoImpl implements DAO<Jouer>{
 	@Override
 	public Jouer find(int id) throws DAOException {
 		Jouer jouer=em.find(Jouer.class, id);
+		System.out.println("find: "+jouer);
 		return jouer;
 	}
 
@@ -48,7 +49,7 @@ public class JouerDaoImpl implements DAO<Jouer>{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Jouer> getAll() throws DAOException {
-		List<Jouer> jouers=em.createQuery("select j from Jouer d").getResultList();
+		List<Jouer> jouers=em.createQuery("select d from Jouer d").getResultList();
 		return jouers;
 	}
 }

@@ -3,7 +3,10 @@ package uppa.m1bigdata.devweb.dao;
 import uppa.m1bigdata.devweb.pojo.*;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.transaction.Transactional;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class JeuImpl implements IJeu{
@@ -33,98 +36,72 @@ public class JeuImpl implements IJeu{
     }
 
     @Override
-    public void jouer(Joueur joueur) {
-
-        int point=0;
-        int roll1 = 0;
-        int roll2 = 0;
-        int roll3 = 0;
-        try {
-            de1 = deDaoImpl.find(1);
-            de2 = deDaoImpl.find(2);
-            de3 = deDaoImpl.find(3);
-        } catch (DAOException e) {
-            e.printStackTrace();
-        }
-
-        roll1 = roll1+de1.roll(1,6);
-        roll2 = roll2+de2.roll(1,6);
-        roll3 = roll3+de3.roll(1,6);
-
-        if(roll1+roll2==roll3) {
-
-            this.combinaison=new Combinaison("velute","combinsaison sans interaction",de1 ,de2 ,de3);
-            point=roll3^2;
-            this.jouer=new Jouer(point, combinaison, joueur, partie);
-
-        }else if (roll1==roll2) {
-            this.combinaison=new Combinaison("chouette","combinsaison sans interaction",de1, de2 ,de3);
-            point=roll1^2;
-            this.jouer=new Jouer(point, combinaison, joueur, partie);
-
-        }else if (roll1==roll2 && roll1==roll3 && roll2==roll3) {
-            this.combinaison=new Combinaison("cul de chouette","combinsaison sans interaction",de1 ,de2 ,de3);
-            if(roll3==1) {
-                point=50;
-                this.jouer=new Jouer(point, combinaison, joueur, partie);
-
-            }else if (roll3==2) {
-                point=60;
-                this.jouer=new Jouer(point, combinaison, joueur, partie);
-
-            }else if (roll3==3) {
-                point=70;
-                this.jouer=new Jouer(point, combinaison, joueur, partie);
-
-            }else if (roll3==4) {
-                point=80;
-                this.jouer=new Jouer(point, combinaison, joueur, partie);
-
-            }else if (roll3==5) {
-                point=90;
-                this.jouer=new Jouer(point, combinaison, joueur, partie);
-
-            } else {
-                point=100;
-                jouer=new Jouer(point, combinaison, joueur, partie);
-            }
-        }else if (roll1+1==roll2&&roll2+1==roll3) {
-            combinaison=new Combinaison("suite","combinsaison avec interaction",de1 ,de2 ,de3);
-        }else if (roll1==roll2&&roll1+roll2==roll3) {
-            combinaison=new Combinaison("chouette velute","combinsaison avec interaction",de1 ,de2 ,de3);
-        }
-
-        try {
-            combinaisonDaoImpl.create(combinaison);
-            if(jouer != null)
-                jouerDaoImpl.create(jouer);
-
-        } catch (DAOException e) {
-            e.printStackTrace();
+    public Partie find(String desc) {
+        String sql = "SELECT p FROM Partie p WHERE p.description = :desc ";
+        Query query = em.createQuery(sql);
+        query.setParameter("desc", desc);
+        List<Partie> parties=query.getResultList();
+        if(parties.size()!=0){
+            return parties.get(0);
+        }else{
+            return null;
         }
     }
 
     @Override
     public Combinaison saveComb(Combinaison combinaison) {
         em.getTransaction().begin();
-        Combinaison comb = em.merge(combinaison);
+        em.persist(combinaison);
         em.getTransaction().commit();
-        return comb;
+        return combinaison;
     }
 
     @Override
     public Partie savePartie(Partie partie) {
         em.getTransaction().begin();
-        Partie par = em.merge(partie);
+        em.persist(partie);
         em.getTransaction().commit();
-        return par;
+        return partie;
     }
 
     @Override
     public Jouer saveJouer(Jouer jouer) {
         em.getTransaction().begin();
-        Jouer j = em.merge(jouer);
+        em.persist(jouer);
         em.getTransaction().commit();
-        return j;
+        return jouer;
     }
+
+    @Override
+    public Combinaison findComb(String nom) {
+        String sql = "SELECT c FROM Combinaison c WHERE c.nomCombinaison = :nom ";
+        Query query = em.createQuery(sql);
+        query.setParameter("nom", nom);
+        List<Combinaison> combinaisons=query.getResultList();
+        if(combinaisons.size()!=0){
+            return combinaisons.get(0);
+        }else{
+            return null;
+        }
+    }
+
+    @Transactional
+    public void insertWithQuery(Jouer jouer) {
+        System.out.println("IDJouer: "+jouer.getIdJouer());
+        System.out.println("POINT: "+jouer.getPoint());
+        System.out.println("IDPartie: "+jouer.getPartie().getIdPartie());
+        System.out.println("IDCombin: "+jouer.getCombinaison().getIdCombinaison());
+        System.out.println("IDJoueur: "+jouer.getJoueur().getIdJoueur());
+
+        em.getTransaction().begin();
+        em.createNativeQuery("INSERT INTO JOUER (IDJOUER, POINT, IDPARTIE, IDJOUEUR, IDCOMBINAISON) VALUES (?,?,?,?,?)")
+                .setParameter(1, jouer.getIdJouer())
+                .setParameter(2, jouer.getPoint())
+                .setParameter(3, jouer.getPartie().getIdPartie())
+                .setParameter(4, jouer.getJoueur().getIdJoueur())
+                .setParameter(5, jouer.getCombinaison().getIdCombinaison())
+                .executeUpdate();
+        em.getTransaction().commit();
+    }
+
 }

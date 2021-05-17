@@ -18,7 +18,7 @@
 </div>
 <div class="container" align="center">
     <a href="JeuServlet?action=demarrerPartie"><button class="btn btn-warning btn-lg">Lancer la Partie !!</button></a>
-</div>
+</div><br/>
 <div class="col row col-md-12 mt-2">
     <div class="col-md-4">
         <div class="container card">
@@ -43,7 +43,6 @@
         <table class="table table-striped table-hover" border="0" cellpadding="5" cellspacing="1" >
             <tr>
                 <th>Nom</th>
-                <th>Age</th>
                 <th>Sexe</th>
                 <th>Ville</th>
                 <th> Statut</th>
@@ -53,7 +52,6 @@
             <c:forEach items="${requestScope.joueurs}" var="sp">
                 <tr>
                     <td>${sp.nomJoueur}</td>
-                    <td>${sp.age}</td>
                     <td>${sp.sexe}</td>
                     <td>${sp.ville}</td>
                         <%--

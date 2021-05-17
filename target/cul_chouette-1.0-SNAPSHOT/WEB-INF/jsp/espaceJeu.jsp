@@ -34,10 +34,12 @@
             <li class="list-group-item d-flex justify-content-between align-items-start">
                 <div class="ms-2 me-auto">
                     <div><b><c:out value="${sp.nomJoueur}" /></b></div>
-                    <h6>Score: </h6>
+                    <h6>Score: <c:out value="${sp.age}" /></h6>
+                    <h6>message: <c:out value="${message}" /></h6>
                 </div>
             </li>
             </c:forEach>
+            <h3>message: <c:out value="${notif}" /></h3>
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

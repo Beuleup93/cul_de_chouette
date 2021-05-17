@@ -15,7 +15,6 @@
 			<tr>
 				<th>Nom</th>
 				<th>Pseudo</th>
-				<th>Age</th>
 				<th>Sexe</th>
 				<th>Ville</th>
 				<th colspan=3 scope="col"> Action</th>
@@ -24,7 +23,6 @@
 				<tr>
 					<td>${sp.nomJoueur}</td>
 					<td>${sp.pseudo}</td>
-					<td>${sp.age}</td>
 					<td>${sp.sexe}</td>
 					<td>${sp.ville}</td>
 					<%--<td><a href="JoueurServletSecondaire?action=editJoueur&idJoueur=<c:out value="${sp.idJoueur}"/>"><button type="button" class="btn btn-default btn-sm">edit</button></a></td>

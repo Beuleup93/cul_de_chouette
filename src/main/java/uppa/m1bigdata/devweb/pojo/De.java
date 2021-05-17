@@ -22,19 +22,6 @@ public class De implements Serializable {
 
 	private String nomDes;
 
-
-	//bi-directional many-to-one association to Combinaison
-	@OneToMany(mappedBy="de1")
-	private List<Combinaison> combinaisons1;
-
-	//bi-directional many-to-one association to Combinaison
-	@OneToMany(mappedBy="de2")
-	private List<Combinaison> combinaisons2;
-
-	//bi-directional many-to-one association to Combinaison
-	@OneToMany(mappedBy="de3")
-	private List<Combinaison> combinaisons3;
-
 	public De() {
 	}
 
@@ -56,71 +43,6 @@ public class De implements Serializable {
 
 	public void setNomDes(String nomDes) {
 		this.nomDes = nomDes;
-	}
-
-	public List<Combinaison> getCombinaisons1() {
-		return this.combinaisons1;
-	}
-
-	public void setCombinaisons1(List<Combinaison> combinaisons1) {
-		this.combinaisons1 = combinaisons1;
-	}
-
-	public Combinaison addCombinaisons1(Combinaison combinaisons1) {
-		getCombinaisons1().add(combinaisons1);
-		combinaisons1.setDe1(this);
-
-		return combinaisons1;
-	}
-
-	public Combinaison removeCombinaisons1(Combinaison combinaisons1) {
-		getCombinaisons1().remove(combinaisons1);
-		combinaisons1.setDe1(null);
-
-		return combinaisons1;
-	}
-
-	public List<Combinaison> getCombinaisons2() {
-		return this.combinaisons2;
-	}
-
-	public void setCombinaisons2(List<Combinaison> combinaisons2) {
-		this.combinaisons2 = combinaisons2;
-	}
-
-	public Combinaison addCombinaisons2(Combinaison combinaisons2) {
-		getCombinaisons2().add(combinaisons2);
-		combinaisons2.setDe2(this);
-
-		return combinaisons2;
-	}
-
-	public Combinaison removeCombinaisons2(Combinaison combinaisons2) {
-		getCombinaisons2().remove(combinaisons2);
-		combinaisons2.setDe2(null);
-
-		return combinaisons2;
-	}
-
-	public List<Combinaison> getCombinaisons3() {
-		return this.combinaisons3;
-	}
-
-	public void setCombinaisons3(List<Combinaison> combinaisons3) {
-		this.combinaisons3 = combinaisons3;
-	}
-
-	public Combinaison addCombinaisons3(Combinaison combinaisons3) {
-		getCombinaisons3().add(combinaisons3);
-		combinaisons3.setDe3(this);
-
-		return combinaisons3;
-	}
-
-	public Combinaison removeCombinaisons3(Combinaison combinaisons3) {
-		getCombinaisons3().remove(combinaisons3);
-		combinaisons3.setDe3(null);
-		return combinaisons3;
 	}
 
 	public int roll(int borneInf, int borneSup){

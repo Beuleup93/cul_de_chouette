@@ -2,6 +2,7 @@ package uppa.m1bigdata.devweb.pojo;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -22,34 +23,21 @@ public class Combinaison implements Serializable {
 
 	private String typeCombinaison;
 
-	//bi-directional many-to-one association to D?
-	@ManyToOne
-	@JoinColumn(name="de1")
-	private De de1;
-
-	//bi-directional many-to-one association to D?
-	@ManyToOne
-	@JoinColumn(name="de2")
-	private De de2;
-
-	//bi-directional many-to-one association to D?
-	@ManyToOne
-	@JoinColumn(name="de3")
-	private De de3;
+	private int valDes1, valDes2, valDes3;
 
 	//bi-directional many-to-one association to Jouer
-	@OneToMany(mappedBy="combinaison", cascade = CascadeType.ALL)
-	private List<Jouer> jouers;
+	@OneToMany(mappedBy="combinaison")
+	private List<Jouer> jouers = new ArrayList<>();
 
 	public Combinaison() {
 	}
 
-	public Combinaison(String nomCombinaison, String typeCombinaison, De de1, De de2, De de3) {
+	public Combinaison(String nomCombinaison, String typeCombinaison, int valDes1, int valDes2, int valDes3) {
 		this.nomCombinaison = nomCombinaison;
 		this.typeCombinaison = typeCombinaison;
-		this.de1 = de1;
-		this.de2 = de2;
-		this.de3 = de3;
+		this.valDes1 = valDes1;
+		this.valDes2 = valDes2;
+		this.valDes3 = valDes3;
 	}
 
 	public int getIdCombinaison() {
@@ -76,30 +64,6 @@ public class Combinaison implements Serializable {
 		this.typeCombinaison = typeCombinaison;
 	}
 
-	public De getDe1() {
-		return this.de1;
-	}
-
-	public void setDe1(De de1) {
-		this.de1 = de1;
-	}
-
-	public De getDe2() {
-		return this.de2;
-	}
-
-	public void setDe2(De de2) {
-		this.de2 = de2;
-	}
-
-	public De getDe3() {
-		return this.de3;
-	}
-
-	public void setDe3(De de3) {
-		this.de3 = de3;
-	}
-
 	public List<Jouer> getJouers() {
 		return this.jouers;
 	}
@@ -108,17 +72,38 @@ public class Combinaison implements Serializable {
 		this.jouers = jouers;
 	}
 
-	public Jouer addJouer(Jouer jouer) {
-		getJouers().add(jouer);
-		jouer.setCombinaison(this);
+	public int getValDes1() {
+		return valDes1;
+	}
 
-		return jouer;
+	public void setValDes1(int valDes1) {
+		this.valDes1 = valDes1;
+	}
+
+	public int getValDes2() {
+		return valDes2;
+	}
+
+	public void setValDes2(int valDes2) {
+		this.valDes2 = valDes2;
+	}
+
+	public int getValDes3() {
+		return valDes3;
+	}
+
+	public void setValDes3(int valDes3) {
+		this.valDes3 = valDes3;
+	}
+
+	public void addJouer(Jouer jouer) {
+		jouers.add(jouer);
+		jouer.setCombinaison(this);
 	}
 
 	public Jouer removeJouer(Jouer jouer) {
 		getJouers().remove(jouer);
 		jouer.setCombinaison(null);
-
 		return jouer;
 	}
 

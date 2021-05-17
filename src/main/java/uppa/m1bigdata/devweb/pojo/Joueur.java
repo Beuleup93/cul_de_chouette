@@ -2,6 +2,7 @@ package uppa.m1bigdata.devweb.pojo;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -30,14 +31,18 @@ public class Joueur implements Serializable {
 
 	private String ville;
 
+	@Transient
+	private int NombrePoint;
+
+	@Transient
+	private String notification;
+
 	//bi-directional many-to-one association to Jouer
 	@OneToMany(mappedBy="joueur")
-	private List<Jouer> jouers;
+	private List<Jouer> jouers = new ArrayList<>();;
 
 	public Joueur() {
 	}
-
-	
 	
 	public Joueur(String nomJoueur, String pseudo, String pwd,int age, String sexe, String ville) {
 		this.nomJoueur = nomJoueur;
@@ -106,6 +111,22 @@ public class Joueur implements Serializable {
 		this.ville = ville;
 	}
 
+	public int getNombrePoint() {
+		return NombrePoint;
+	}
+
+	public void setNombrePoint(int nombrePoint) {
+		NombrePoint = nombrePoint;
+	}
+
+	public String getNotification() {
+		return notification;
+	}
+
+	public void setNotification(String notification) {
+		this.notification = notification;
+	}
+
 	public List<Jouer> getJouers() {
 		return this.jouers;
 	}
@@ -114,11 +135,9 @@ public class Joueur implements Serializable {
 		this.jouers = jouers;
 	}
 
-	public Jouer addJouer(Jouer jouer) {
-		getJouers().add(jouer);
+	public void addJouer(Jouer jouer) {
+		jouers.add(jouer);
 		jouer.setJoueur(this);
-
-		return jouer;
 	}
 
 	public Jouer removeJouer(Jouer jouer) {
